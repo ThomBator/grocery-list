@@ -1,18 +1,38 @@
 import { useState } from "react";
-import { FormControl, HStack, Input, Button } from "@chakra-ui/react";
+import { FormControl, HStack, Input, Button, Alert } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
+import supabase from "../config/supabase-client";
 function AddItem() {
   const [inputValue, setInputValue] = useState("");
 
+  const insertData = async (event) => {
+    const description = inputValue.trim();
+
+    if (!description) {
+      return;
+    } else {
+      const { data, error } = await supabase
+        .from("ListItems")
+        .insert({ description })
+        .select();
+      if (error) {
+        console.error(error);
+      }
+      if (data) {
+        console.log(data[0].description);
+      }
+    }
+  };
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      console.log(event.target.value);
+      insertData(event);
     }
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputValue);
+    insertData(event);
   };
   return (
     <Form onSubmit={handleSubmit}>
