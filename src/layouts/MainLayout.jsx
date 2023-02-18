@@ -1,12 +1,24 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { Container } from "@chakra-ui/react";
+import { Container, Grid, GridItem } from "@chakra-ui/react";
+import Navigation from "../components/Navigation";
 
 function MainLayout() {
   return (
-    <Container as="main">
-      <Outlet />
-    </Container>
+    <Grid templateColumns="repeat(6, 1fr)">
+      <GridItem
+        as="nav"
+        colSpan={{ base: 6, lg: 1 }}
+        bg="green.500"
+        color="white"
+        p={{ base: "20px", lg: "30px" }}
+      >
+        <Navigation />
+      </GridItem>
+      <GridItem as="main" colSpan={{ base: 6, lg: 5 }}>
+        <Outlet />
+      </GridItem>
+    </Grid>
   );
 }
 

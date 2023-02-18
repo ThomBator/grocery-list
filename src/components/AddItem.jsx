@@ -40,8 +40,9 @@ function AddItem({ submitHandler }) {
             placeholder="Add an item..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
+            width="300px"
           />
-          <Button type="submit" colorScheme="blue">
+          <Button type="submit" colorScheme="green">
             Add
           </Button>
         </HStack>
