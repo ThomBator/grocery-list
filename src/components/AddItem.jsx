@@ -2,7 +2,8 @@ import { useState } from "react";
 import { FormControl, HStack, Input, Button, Alert } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
 import supabase from "../config/supabase-client";
-function AddItem() {
+
+function AddItem({ submitHandler }) {
   const [inputValue, setInputValue] = useState("");
 
   const insertData = async (event) => {
@@ -15,18 +16,14 @@ function AddItem() {
         .from("ListItems")
         .insert({ description })
         .select();
+
       if (error) {
         console.error(error);
       }
       if (data) {
-        console.log(data[0].description);
+        submitHandler();
+        setInputValue("");
       }
-    }
-  };
-
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      insertData(event);
     }
   };
 
@@ -43,9 +40,10 @@ function AddItem() {
             placeholder="Add an item..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
           />
-          <Button type="submit">Add</Button>
+          <Button type="submit" colorScheme="blue">
+            Add
+          </Button>
         </HStack>
       </FormControl>
     </Form>
