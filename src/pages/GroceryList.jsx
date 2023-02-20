@@ -81,7 +81,7 @@ function GroceryList() {
   return (
     <Container maxW="36rem">
       <Card
-        mt="5rem"
+        mt="2rem"
         bg="green.50"
         p="1rem"
         borderRadius="xl"
