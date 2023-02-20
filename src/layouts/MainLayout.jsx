@@ -12,6 +12,7 @@ function MainLayout() {
         bg="green.500"
         color="white"
         p={{ base: "20px", lg: "30px" }}
+        minH={{ base: "2rem", lg: "100vh" }}
       >
         <Navigation />
       </GridItem>

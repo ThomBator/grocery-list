@@ -42,7 +42,8 @@ function Item({ item, deleteItem, updateItem }) {
         onSubmit={(des) => handleUpdate(des)}
       >
         <EditablePreview
-          border="1px"
+          borderBottom="2px"
+          borderStyle="dotted"
           borderColor="gray.200"
           width="300px"
           pl="1rem"

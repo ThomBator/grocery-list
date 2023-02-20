@@ -19,7 +19,10 @@ function GroceryList() {
   const [list, setList] = useState([]);
 
   const fetchList = async () => {
-    const { data, error } = await supabase.from("ListItems").select();
+    const { data, error } = await supabase
+      .from("ListItems")
+      .select()
+      .order("id");
 
     if (error) {
       console.error(error);
@@ -59,8 +62,20 @@ function GroceryList() {
     }
   };
 
+  const deleteAll = async () => {
+    const { data, error } = await supabase
+      .from("ListItems")
+      .delete()
+      .neq("id", 0)
+      .select();
+
+    if (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    fetchList();
+    deleteAll();
   }, []);
 
   return (
@@ -69,7 +84,7 @@ function GroceryList() {
         mt="5rem"
         bg="green.50"
         p="1rem"
-        borderRadius="md"
+        borderRadius="xl"
         minHeight="80vh"
         borderTop="8px"
         borderBottom="8px"
@@ -86,7 +101,7 @@ function GroceryList() {
             fontWeight="semibold"
             bgGradient="linear(to-r, teal.500, green.500)"
           >
-            Grocery List
+            Your First List
           </Heading>
           <AddItem submitHandler={fetchList} />
 
