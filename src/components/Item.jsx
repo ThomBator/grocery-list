@@ -39,7 +39,7 @@ function Item({ item, deleteItem, updateItem }) {
 
       <Editable
         defaultValue={item.description}
-        onSubmit={(des) => handleUpdate(des)}
+        onSubmit={(description) => handleUpdate(description)}
       >
         <EditablePreview
           borderBottom="2px"

@@ -10,7 +10,7 @@ export const theme = extendTheme({
     global: {
       "html, body": {
         "background-color": "#fdf8f1",
-        "background-image": "url(images/OG27A00.jpg)",
+        "background-image": " url(images/OG27A00.jpg)",
         "background-position": "center",
       },
     },

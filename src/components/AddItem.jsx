@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FormControl, HStack, Input, Button, Alert } from "@chakra-ui/react";
 import { Form } from "react-router-dom";
-import supabase from "../config/supabase-client";
+import axios from "axios";
 
 function AddItem({ submitHandler }) {
   const [inputValue, setInputValue] = useState("");
@@ -12,18 +12,16 @@ function AddItem({ submitHandler }) {
     if (!description) {
       return;
     } else {
-      const { data, error } = await supabase
-        .from("ListItems")
-        .insert({ description })
-        .select();
-
-      if (error) {
-        console.error(error);
-      }
-      if (data) {
-        submitHandler();
-        setInputValue("");
-      }
+      axios
+        .post("http://localhost:5000/api/items", { description })
+        .then((res) => {
+          if (res.data) {
+            submitHandler();
+            setInputValue("");
+          } else {
+            console.error("Insert item failed");
+          }
+        });
     }
   };
 
